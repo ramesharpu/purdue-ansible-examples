@@ -1,0 +1,15 @@
+---
+- name: Ping all hosts in inventory
+  hosts: all
+  gather_facts: no
+  
+  tasks:
+    - name: Ping each host
+      ansible.builtin.ping:
+      register: ping_results
+
+    - name: Display ping results
+      debug:
+        msg: "Ping result for {{ item.key }}: {{ item.value }}"
+      loop: "{{ ping_results['ansible_facts'] | dict2items }}"
+

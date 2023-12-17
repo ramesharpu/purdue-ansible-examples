@@ -1,0 +1,22 @@
+---
+- name: Ping multiple hosts using a loop
+  hosts: all
+  gather_facts: no  # Disable gathering facts
+
+  vars:
+    target_hosts:
+      - 192.168.237.145
+      - 192.168.237.146
+      - 192.168.237.147
+
+  tasks:
+    - name: Ping specified hosts
+      ansible.builtin.ping:
+      with_items: "{{ target_hosts }}"
+      register: ping_results
+
+    - name: Display ping results
+      debug:
+        msg: "Ping result for {{ item.item }}: {{ item.msg }}"
+      loop: "{{ ping_results.results }}"
+

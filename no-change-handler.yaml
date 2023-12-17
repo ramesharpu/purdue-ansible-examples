@@ -1,0 +1,14 @@
+---
+- name: Demo for handlers
+  hosts: all
+  tasks:
+    - name: This is a demo for handlers
+      ansible.builtin.ping:
+      notify:
+        - run debug
+     
+  handlers:
+    - name: run debug
+      ansible.builtin.debug:
+        msg: Hello World
+

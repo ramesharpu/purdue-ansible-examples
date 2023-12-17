@@ -1,0 +1,20 @@
+---
+- name: Example Playbook with Conditionals
+  hosts: all
+  gather_facts: yes
+  become: true
+  become_method: sudo
+
+  tasks:
+    - name: Check OS and perform tasks accordingly
+      yum:
+        name: java
+        state: latest
+      when: ansible_facts['os_family'] == 'RedHat'
+
+    - name: Another task for Debian-based systems
+      apt:
+        name: java
+        state: latest
+      when: ansible_facts['os_family'] == 'Debian'
+

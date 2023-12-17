@@ -1,0 +1,25 @@
+---
+vars:
+  webservers:
+    - 192.168.237.145
+    - 192.168.237.146
+
+- name: Ping hosts using variables
+  hosts: "{{webservers[1]}}"
+  tasks:
+    - name: Ping specified hosts
+      ansible.builtin.ping: {}
+
+---
+# Define variables
+vars:
+  target_hosts:
+    - 192.168.237.145
+    - 192.168.237.146
+
+# Playbook section
+- name: Ping hosts using variables
+  hosts: "{{ target_hosts }}"
+  tasks:
+    - name: Ping specified hosts
+      ansible.builtin.ping: {}

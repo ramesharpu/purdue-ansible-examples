@@ -1,0 +1,14 @@
+---
+- name: Register Variable Example
+  hosts: 192.168.237.145  # Replace with your target hosts
+  gather_facts: yes
+
+  tasks:
+    - name: Get disk space information
+      ansible.builtin.shell: df -h 
+      register: disk_space
+
+    - name: Display disk space information
+      debug:
+        var: disk_space.stdout_lines
+

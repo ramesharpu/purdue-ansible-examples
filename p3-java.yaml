@@ -1,0 +1,9 @@
+- name: Java installation
+  hosts: all
+  become: true
+  become_method: sudo
+  tasks:
+   - name: install java on the node machine
+     yum:
+         name: java
+         state: latest
